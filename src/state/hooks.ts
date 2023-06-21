@@ -6,14 +6,12 @@ import reducer from "./reducer";
 import initialState from "./state";
 import { ActionType, GameStage } from "./types";
 import { api } from "../api";
-import { roundToTwoDecimals } from "../helpers";
+import { roundToTwoDecimals, useSearchParams } from "../helpers";
 
 const useGameLogic = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const currentCoefficientRef = useRef(1);
-  const { user_id } = Object.fromEntries(
-    new URLSearchParams(location.search).entries()
-  );
+  const { user_id } = useSearchParams()
 
   const handleSetLoadStage = () =>
     dispatch({ type: ActionType.SET_WAIT_STAGE });
@@ -152,7 +150,6 @@ const useGameLogic = () => {
   const getMoneyAmountEffect = () => {
     api.wallet.get(user_id).then((response) => {
       const { money_amount } = response.data;
-      console.log(money_amount);
       dispatch({
         type: ActionType.SET_MONEY_AMOUNT,
         value: money_amount,

@@ -34,10 +34,7 @@ const usePotentialWinAnimation = (
           containerRef.current!.innerHTML = `x${animationTarget.betAmount.toFixed(
             2
           )}&nbsp;💎`;
-        },
-        complete: () => {
-          console.log("done");
-        },
+        }
       });
     }
   }, [isAnimationStarted]);
@@ -92,12 +89,14 @@ function Betting() {
     !isBetWithdrawn;
   const isAbleToConfirmBet = stage === GameStage.WAIT;
 
+  const isBetControlsDisabled = isBetConfirmed || stage === GameStage.PLAY;
+
   return (
     <div className={styles.betting}>
       <div className={styles.betting__input}>
         <div className={styles.betting__input__counter}>
           <button
-            disabled={isBetConfirmed}
+            disabled={isBetControlsDisabled}
             className={clsx(
               styles.betting__input__counter__button,
               styles["betting__input__counter__button--minus"]
@@ -110,13 +109,13 @@ function Betting() {
               inputMode="numeric"
               pattern="[0-9.]*"
               value={betAmount}
-              disabled={isBetConfirmed}
+              disabled={isBetControlsDisabled}
               onChange={handleBetInputChange}
             ></input>
             <span>&nbsp;💎</span>
           </div>
           <button
-            disabled={isBetConfirmed}
+            disabled={isBetControlsDisabled}
             className={clsx(
               styles.betting__input__counter__button,
               styles["betting__input__counter__button--plus"]
@@ -127,28 +126,28 @@ function Betting() {
         <div className={styles.betting__input__delimiter} />
         <div className={styles.betting__input__bids}>
           <button
-            disabled={isBetConfirmed}
+            disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
             onClick={() => handleBetButtonClick(50)}
           >
             +50
           </button>
           <button
-            disabled={isBetConfirmed}
+            disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
             onClick={() => handleBetButtonClick(100)}
           >
             +100
           </button>
           <button
-            disabled={isBetConfirmed}
+            disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
             onClick={() => handleBetButtonClick(250)}
           >
             +250
           </button>
           <button
-            disabled={isBetConfirmed}
+            disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
             onClick={() => handleBetButtonClick(moneyAmount)}
           >

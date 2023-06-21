@@ -1,4 +1,4 @@
-import { Route } from "wouter";
+import { Route, Router } from "wouter";
 
 import { BetHistory, GamePage } from "./components";
 
@@ -23,8 +23,10 @@ function App() {
   return (
     <main className={styles.App}>
       <GameContext.Provider value={[state, handlers, currentCoefficientRef]}>
-        <Route path="/bids" component={BetHistory} />
-        <Route path="/" component={GamePage} />
+        <Router base="aviator-game">
+          <Route path="/bids" component={BetHistory} />
+          <Route path="/" component={GamePage} />
+        </Router>
       </GameContext.Provider>
     </main>
   );

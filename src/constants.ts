@@ -9,7 +9,7 @@ export const ANIMATION_DURATION_COEFFICIENT_MS = 3000;
 
 export const MAX_HISTORY_ELEMENTS_ON_PAGE = 10;
 
-export const LOCALIZATION = {
+export const LOCALIZATION: Record<'ru' | 'en', Record<string, string>> = {
   ru: {
     "withdraw.popup.title": "Вы успели вывести!",
     "withdraw.modal.link": "Забрать выигрыш",

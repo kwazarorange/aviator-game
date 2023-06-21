@@ -3,6 +3,6 @@ import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/aviator-game',
+  base: '/aviator-game/',
   plugins: [react()],
 })

@@ -1,0 +1,42 @@
+.history {
+    position: relative;
+    width: 100%;
+    overflow-scrolling: touch;
+    -ms-overflow-style: none;
+    align-items: start;
+    box-sizing: border-box;
+    color: #fff;
+    display: flex;
+    gap: 4px;
+    height: 34px;
+    max-width: 100%;
+    overflow-y: scroll;
+    padding: 4px;
+    scrollbar-width: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    &::-webkit-scrollbar {
+        display: none
+    }
+
+    &__item {
+        align-items: center;
+        border-radius: 7px;
+        display: flex;
+        font-size: 12px;
+        height: 26px;
+        justify-content: center;
+        min-width: 58px;
+        width: 58px;
+        background: #3e5bc2;
+
+        &--purple {
+            background: #753ec2
+        }
+
+        &--orange {
+            background: #de8b03
+        }
+    }
+}

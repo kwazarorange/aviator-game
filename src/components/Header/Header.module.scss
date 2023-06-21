@@ -1,0 +1,131 @@
+.header {
+    background: #151028;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Manrope;
+    height: 100px;
+    margin-bottom: 8px;
+
+    width: 100%;
+
+    &__info {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        height: 54px;
+        justify-content: space-between;
+
+        width: 100%;
+
+        img {
+            margin-left: 8px;
+            width: 30%
+        }
+    }
+
+
+    &__wallet,
+    &__statistics {
+        align-items: center;
+        box-sizing: border-box;
+        display: flex
+    }
+
+    &__statistics {
+        background: #110d21;
+        border-radius: 10px;
+        height: 38px;
+        margin-right: 8px;
+        padding: 4px    
+    }
+
+    &__wallet {
+        background: #231d47;
+        border-radius: 8px;
+        color: #fff;
+        height: 30px;
+        min-width: 85px;
+        padding-left: 8px;
+
+        img {
+            height: 13px;
+            margin-left: 0
+        }
+
+        h3 {
+            flex-grow: 3;
+            font-family: Manrope;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 700;
+            padding: 0 7px
+        }
+
+        @media (max-width:320px) and (min-width:290px) {
+            h3 {
+                font-size: 11px;
+            }
+        }
+
+        @media (max-width:289px) {
+            h3 {
+                font-size: 9px
+            }
+
+        }
+
+    }
+
+    &__delimiter {
+        background: #261f4d;
+        border-radius: 1px;
+        height: 16px;
+        margin: 0 8px;
+        width: 2px;
+    }
+
+    &__record {
+        display: flex;
+        align-items: center;
+        column-gap: 4px;
+
+        span {
+            color: #fff;
+            font-size: 11px;
+        }
+
+        @media (max-width:320px) and (min-width:290px) {
+            span {
+                font-size: 9px
+            }
+        }
+
+        @media (max-width:289px) {
+            span {
+                font-size: 9px
+            }
+        }
+    }
+
+    &__ratio {
+        align-items: center;
+        display: flex;
+        height: 26px;
+        background: #de8b03;
+        border-radius: 8px;
+        color: #fff;
+        display: flex;
+        font-size: 12px;
+        padding: 0 10px;
+
+        @media (max-width:320px) and (min-width:290px) {
+            font-size: 9px
+        }
+
+        @media (max-width:289px) {
+            font-size: 9px
+        }
+    }
+}

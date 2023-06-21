@@ -1,0 +1,164 @@
+$loading-duration-seconds: 8s;
+
+:export {
+    loadingDurationSeconds: $loading-duration-seconds;
+}
+
+.container {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    z-index: 111;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: Halvar;
+}
+
+
+.loader {
+    &__container {
+        position: relative;
+        height: 63px;
+        width: 63px
+    }
+
+    &__title {
+        width: 290px;
+        font-size: 24px;
+        text-align: center;
+        color: #fff;
+    }
+
+    &__bar {
+        margin-top: 17px;
+        position: relative;
+        width: 213px;
+        height: 6px;
+        border-radius: 24px;
+        background: hsla(0, 0%, 100%, .1);
+
+        &::after {
+            animation-duration: $loading-duration-seconds;
+            animation-name: progress-bar;
+            animation-timing-function: linear;
+            background: #944ef5;
+            border-radius: 24px;
+            box-shadow: 0 2px 9px rgba(148, 78, 245, .25);
+            content: "";
+            height: 4px;
+            left: 1px;
+            position: absolute;
+            top: 1px;
+            width: 0
+        }
+    }
+}
+
+.circle__container {
+    position: absolute;
+    top: 0
+}
+
+.circle {
+    position: relative;
+    height: 63px;
+    width: 63px;
+
+    &__inside,
+    &__outside {
+        position: absolute;
+        animation-iteration-count: infinite;
+        animation-name: loading;
+        animation-timing-function: linear;
+        transform-origin: center;
+        transition-delay: 0s
+    }
+
+    &__inside {
+        animation-duration: 4s;
+        left: 10px;
+        top: 6px
+    }
+
+    &__outside {
+        animation-duration: 5s
+    }
+}
+
+.rocket__container {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    height: 33px;
+    width: 32px
+}
+
+.exhaust,
+.rocket {
+    position: absolute;
+    transform-origin: center;
+    transition-delay: 0s;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-name: bounce;
+    animation-timing-function: linear;
+}
+
+.exhaust {
+    animation-name: bounce-reverse;
+    bottom: 0;
+    left: 8px
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0)
+    }
+
+    to {
+        transform: rotate(2turn)
+    }
+}
+
+
+@keyframes bounce {
+    0% {
+        transform: translateY(-2px)
+    }
+
+    50% {
+        transform: translateY(1px)
+    }
+
+    to {
+        transform: translateY(-2px)
+    }
+}
+
+@keyframes bounce-reverse {
+    0% {
+        transform: translateY(2px)
+    }
+
+    50% {
+        transform: translateY(1px)
+    }
+
+    to {
+        transform: translateY(2px)
+    }
+}
+
+@keyframes progress-bar {
+    0% {
+        width: 211px
+    }
+
+    to {
+        width: 0
+    }
+}

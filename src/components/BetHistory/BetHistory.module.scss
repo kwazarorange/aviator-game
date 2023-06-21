@@ -1,0 +1,131 @@
+.container {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    background: #261c4a;
+    height: 100vh;
+    max-height: 760px;
+    max-width: 420px;
+    padding: 0 14px;
+    position: relative;
+    width: 100vw
+}
+
+.bets {
+    &__list {
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        height: calc(100% - 124px);
+        overflow: hidden;
+    }
+
+    &__header {
+        align-items: center;
+        display: flex;
+        flex-direction: row;
+        height: 46px;
+        justify-content: space-between
+    }
+
+    &__title {
+        color: #fff;
+        font-family: Halvar;
+        font-size: 14px;
+        letter-spacing: .06em;
+        line-height: 18px
+    }
+
+    &__close {
+        all: unset;
+        cursor: pointer;
+    }
+}
+
+.bet {
+    border-radius: 12px;
+    box-sizing: border-box;
+    display: flex;
+    font-family: Manrope;
+    height: 40px;
+    justify-content: space-between;
+    min-height: 40px;
+
+    width: 100%;
+    
+    &--success {
+        background-color: #35205b;
+        border: 1px solid #6537a8;
+    }
+
+    &--failure {
+        background-color: #292252;
+    }
+
+    &__datetime {
+        align-items: center;
+        color: #948ac5;
+        display: flex;
+        font-size: 12px;
+        font-weight: 500;
+        gap: 5px;
+        height: 100%;
+        margin-left: 12px;
+        width: 70px
+    }
+
+    &__amount {
+        align-items: center;
+        color: #dfe5f2;
+        display: flex;
+        font-size: 12px;
+        height: 100%;
+        justify-content: flex-end;
+        margin-right: 12px;
+        width: 70px
+    }
+}
+
+.footer {
+    align-items: center;
+    background-color: #221b43;
+    bottom: 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    height: 76px;
+    justify-content: space-between;
+    margin-left: -14px;
+    padding: 0 55px;
+    width: calc(100% + 28px);
+
+    &__nav {
+        all: unset;
+        cursor: pointer;
+
+        &:disabled {
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        &--left {
+            transform: scaleX(-1);
+        }
+    }
+
+    &__page {
+        font-size: 16px;
+        font-style: normal;
+        line-height: 22px;
+        color: rgba(223, 229, 242, .7);
+
+        &--current {
+            color: #fff;
+            font-weight: 500;
+        }
+
+
+    }
+}

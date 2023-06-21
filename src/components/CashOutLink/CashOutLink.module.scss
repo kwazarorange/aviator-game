@@ -1,0 +1,23 @@
+// TODO: animation
+.cashout {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+
+    background: #944ef5;
+    border-radius: 12px;
+    box-sizing: border-box;
+    color: #fff;
+    cursor: pointer;
+    flex-direction: row;
+    font-family: Manrope;
+    height: 50px;
+    overflow: visible;
+    padding: 17px;
+    width: 100%;
+
+    &:active {
+        opacity: 0.7;
+    }
+
+}

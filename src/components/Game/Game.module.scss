@@ -1,0 +1,91 @@
+.container {
+    background: #151028;
+    border: 2px solid #261c4a;
+    border-radius: 16px;
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 280px;
+    overflow: hidden;
+    padding: 10px;
+    position: relative;
+    width: 100%;
+
+    &__border {
+        height: 100%;
+        margin: 0 auto;
+        max-width: 400px;
+        position: relative
+    }
+}
+
+.background {
+    background-repeat: no-repeat;
+    background-size: contain;
+    left: 0;
+    position: absolute;
+
+    &--stars {
+        background-image: url(/src/assets/images/star.svg);
+        background-repeat: repeat;
+        background-size: contain;
+        height: 60%;
+        opacity: .3;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+    }
+
+    &--left {
+        background-image: url(/src/assets/images/gameLayoutBackgroundLeft.svg);
+        background-position-y: 0;
+        background-repeat: repeat-y;
+        height: calc(100% - 10px);
+        top: 0;
+        transition-delay: 0s;
+        width: 11px;
+
+        &--running {
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-name: borderLeftRunning;
+            animation-timing-function: linear
+        }
+    }
+
+    &--bottom {
+        background-image: url(/src/assets/images/gameLayoutBackgroundBottom.svg);
+        background-repeat: repeat-x;
+        bottom: 0;
+        height: 11px;
+        left: 10px;
+        transition-delay: 0s;
+        width: 100%;
+
+        &--running {
+            animation-duration: 4s;
+            animation-iteration-count: infinite;
+            animation-name: borderBottomRunning;
+            animation-timing-function: linear
+        }
+    }
+}
+
+@keyframes borderLeftRunning {
+    0% {
+        background-position-y: 0
+    }
+
+    to {
+        background-position-y: 220px
+    }
+}
+
+@keyframes borderBottomRunning {
+    0% {
+        background-position-x: 0
+    }
+
+    to {
+        background-position-x: -220px
+    }
+}

@@ -11,7 +11,7 @@ import { roundToTwoDecimals, useSearchParams } from "../helpers";
 const useGameLogic = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const currentCoefficientRef = useRef(1);
-  const { user_id } = useSearchParams()
+  const { user_id } = useSearchParams();
 
   const handleSetLoadStage = () =>
     dispatch({ type: ActionType.SET_WAIT_STAGE });
@@ -55,14 +55,32 @@ const useGameLogic = () => {
     });
   };
 
+  const handleLoseBet = () => {
+    api.bets
+      .post({
+        user_id: user_id,
+        bet: Number(state.betAmount),
+        coefficient: state.maxCoefficient,
+        winning_amount: 0,
+        is_active_bet: true,
+      })
+      .then((response) => {
+        if (response.ok) {
+          dispatch({
+            type: ActionType.LOSE_BET,
+          });
+        }
+      });
+  };
+
   const handleWithdrawBet = () => {
     api.bets
       .post({
         user_id: user_id,
         bet: Number(state.betAmount),
-        coefficient: state.withdrawCoefficient,
+        coefficient: currentCoefficientRef.current,
         winning_amount: roundToTwoDecimals(
-          state.withdrawCoefficient * Number(state.betAmount)
+          currentCoefficientRef.current * Number(state.betAmount)
         ),
         is_active_bet: true,
       })
@@ -129,6 +147,10 @@ const useGameLogic = () => {
       setTimeout(() => {
         handleSetLoadStage();
       }, 5000);
+
+      if (!state.isBetWithdrawn && state.isBetConfirmed) {
+        handleLoseBet();
+      }
     }
   };
 

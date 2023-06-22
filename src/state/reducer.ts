@@ -68,6 +68,11 @@ const reducer: Reducer<State, Action> = (state, action) => {
         isBetWithdrawn: true,
         isWithdrawModalVisible: true,
       };
+    case ActionType.LOSE_BET:
+      return {
+        ...state,
+        moneyAmount: roundToTwoDecimals(state.moneyAmount - Number(state.betAmount))
+      }
     case ActionType.SET_ROUND_END:
       return {
         ...state,

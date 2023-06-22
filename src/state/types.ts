@@ -35,6 +35,7 @@ export enum ActionType {
   SET_COEFFICIENT_LIST = "SET_COEFFICIENT_LIST",
   CONFIRM_BET = "CONFIRM_BET",
   WITHDRAW_BET = "WITHDRAW_BET",
+  LOSE_BET = "LOSE_BET",
   SET_ROUND_END = "SET_ROUND_END",
   RESET_ROUND = "RESET_ROUND",
   CLOSE_WITHDRAW_MODAL = "CLOSE_WITHDRAW_MODAL",
@@ -59,6 +60,8 @@ export type Action =
   | {
       type: ActionType.WITHDRAW_BET;
       value: number;
+    } | {
+      type: ActionType.LOSE_BET;
     }
   | {
       type: ActionType.SET_MONEY_AMOUNT;

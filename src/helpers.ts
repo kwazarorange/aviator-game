@@ -1,6 +1,6 @@
 import anime, { AnimeInstance } from "animejs";
 import { LOCALIZATION } from "./constants";
-
+import { Language } from "./types";
 export const roundToTwoDecimals = (x: number) => Math.round(x * 100) / 100;
 
 export const useSearchParams = () => {
@@ -16,7 +16,7 @@ export const useSearchParams = () => {
 
 export const localization = (id: string) => {
   const { lang } = useSearchParams();
-  return LOCALIZATION[lang as "ru" | "en"][id] ?? id;
+  return LOCALIZATION[lang as Language]?.[id] ?? id;
 };
 
 /** @TODO: hack to ACTUALLY stop animation,

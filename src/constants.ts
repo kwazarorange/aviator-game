@@ -1,4 +1,5 @@
 import loadingScreenStyles from "./components/LoadingScreen/LoadingScreen.module.scss";
+import { Language } from "./types";
 
 export const WAITING_SCREEN_DURATION_SECONDS = parseInt(
   loadingScreenStyles.loadingDurationSeconds
@@ -8,8 +9,6 @@ export const WAITING_SCREEN_DURATION_SECONDS = parseInt(
 export const ANIMATION_DURATION_COEFFICIENT_MS = 3000;
 
 export const MAX_HISTORY_ELEMENTS_ON_PAGE = 10;
-
-export type Language = "ru" | "en" | "pt" | "es" | "fr" | "az";
 
 export const LOCALIZATION: Record<Language, Record<string, string>> = {
   ru: {

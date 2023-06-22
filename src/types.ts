@@ -13,3 +13,5 @@ export type Bet = {
   coefficient: number;
   winning_amount: number;
 };
+
+export type Language = "ru" | "en" | "pt" | "es" | "fr";

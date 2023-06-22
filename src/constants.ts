@@ -105,25 +105,6 @@ export const LOCALIZATION: Record<Language, Record<string, string>> = {
     "bet.place": "PARI",
     "history.title": "MON HISTORIQUE DE PARI",
   },
-  az: {
-    "withdraw.popup.title": "You managed to pick up!",
-    "withdraw.modal.link": "Get rewarded",
-    "withdraw.modal.continue": "Continue playing",
-
-    "request.popup.title":
-      "You do not have enough funds in your account. Click the button to get 100 💎",
-
-    "wait.title": "Waiting for the next round",
-
-    "header.record": "Record",
-
-    "cashout.link": "Get rewarded",
-
-    "bet.withdraw": "WITHDRAW",
-    "bet.cancel": "CANCEL",
-    "bet.place": "BET",
-    "history.title": "MY BET HISTORY",
-  },
 };
 
 export const GAME_CONTAINER_WIDTH = 500;

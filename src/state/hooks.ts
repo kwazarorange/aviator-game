@@ -55,44 +55,38 @@ const useGameLogic = () => {
     });
   };
 
-  const handleLoseBet = () => {
+  const handleBetResult = (isWin: boolean) => {
+    const moneyAmountDifference = isWin
+      ? roundToTwoDecimals(
+          currentCoefficientRef.current * Number(state.betAmount)
+        )
+      : 0;
+
+    const coefficient = isWin
+      ? currentCoefficientRef.current
+      : state.maxCoefficient;
+
     api.bets
       .post({
         user_id: user_id,
         bet: Number(state.betAmount),
-        coefficient: state.maxCoefficient,
-        winning_amount: 0,
+        coefficient: coefficient,
+        winning_amount: moneyAmountDifference,
         is_active_bet: true,
       })
       .then((response) => {
-        if (response.ok) {
+        if (isWin && response.ok) {
           dispatch({
-            type: ActionType.LOSE_BET,
+            type: ActionType.WITHDRAW_BET,
+            value: coefficient,
           });
         }
       });
   };
 
-  const handleWithdrawBet = () => {
-    api.bets
-      .post({
-        user_id: user_id,
-        bet: Number(state.betAmount),
-        coefficient: currentCoefficientRef.current,
-        winning_amount: roundToTwoDecimals(
-          currentCoefficientRef.current * Number(state.betAmount)
-        ),
-        is_active_bet: true,
-      })
-      .then((response) => {
-        if (response.ok) {
-          dispatch({
-            type: ActionType.WITHDRAW_BET,
-            value: currentCoefficientRef.current,
-          });
-        }
-      });
-  };
+  const handleLoseBet = () => handleBetResult(false);
+
+  const handleWithdrawBet = () => handleBetResult(true);
 
   const handleCloseWithdrawModal = () =>
     dispatch({ type: ActionType.CLOSE_WITHDRAW_MODAL });

@@ -21,7 +21,7 @@ export type State = {
 
   moneyAmount: number;
   history: Array<Bet>;
-  coefficientList: Array<number>
+  coefficientList: Array<number>;
   casinoLink: string;
 };
 
@@ -35,11 +35,10 @@ export enum ActionType {
   SET_COEFFICIENT_LIST = "SET_COEFFICIENT_LIST",
   CONFIRM_BET = "CONFIRM_BET",
   WITHDRAW_BET = "WITHDRAW_BET",
-  LOSE_BET = "LOSE_BET",
   SET_ROUND_END = "SET_ROUND_END",
   RESET_ROUND = "RESET_ROUND",
   CLOSE_WITHDRAW_MODAL = "CLOSE_WITHDRAW_MODAL",
-  CLOSE_REQUEST_FUNDS_POPUP = "CLOSE_REQUEST_FUNDS_POPUP"
+  CLOSE_REQUEST_FUNDS_POPUP = "CLOSE_REQUEST_FUNDS_POPUP",
 }
 
 export type Action =
@@ -60,8 +59,6 @@ export type Action =
   | {
       type: ActionType.WITHDRAW_BET;
       value: number;
-    } | {
-      type: ActionType.LOSE_BET;
     }
   | {
       type: ActionType.SET_MONEY_AMOUNT;
@@ -81,12 +78,14 @@ export type Action =
     }
   | {
       type: ActionType.CLOSE_WITHDRAW_MODAL;
-    } | {
-      type: ActionType.CLOSE_REQUEST_FUNDS_POPUP
+    }
+  | {
+      type: ActionType.CLOSE_REQUEST_FUNDS_POPUP;
     }
   | {
       type: ActionType.RESET_ROUND;
-    } | {
-      type: ActionType.SET_COEFFICIENT_LIST,
-      value: Array<number>
+    }
+  | {
+      type: ActionType.SET_COEFFICIENT_LIST;
+      value: Array<number>;
     };

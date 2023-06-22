@@ -16,7 +16,11 @@ export const useSearchParams = () => {
 
 export const localization = (id: string) => {
   const { lang } = useSearchParams();
-  return LOCALIZATION[lang as Language]?.[id] ?? id;
+  return (
+    LOCALIZATION[lang as Language]?.[id] ??
+    LOCALIZATION["ru" as Language][id] ??
+    id
+  );
 };
 
 /** @TODO: hack to ACTUALLY stop animation,

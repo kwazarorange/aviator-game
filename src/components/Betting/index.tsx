@@ -6,7 +6,7 @@ import { ANIMATION_DURATION_COEFFICIENT_MS } from "../../constants";
 import { GameContext, GameStage } from "../../state";
 
 import styles from "./Betting.module.scss";
-import { localization } from "../../helpers";
+import { cancelAnimation, localization } from "../../helpers";
 
 const usePotentialWinAnimation = (
   containerRef: RefObject<HTMLParagraphElement>,
@@ -14,7 +14,8 @@ const usePotentialWinAnimation = (
   betAmount: string,
   animationRandomnessCoefficient: number,
   isAnimationStarted: boolean,
-  isAnimationStopped: boolean
+  isAnimationStopped: boolean,
+  isRoundLost: boolean
 ) => {
   const animationRef = useRef<anime.AnimeInstance>();
   const animationTarget = { betAmount: Number(betAmount) };
@@ -31,19 +32,30 @@ const usePotentialWinAnimation = (
           animationRandomnessCoefficient *
           finalCoefficient,
         update: () => {
-          containerRef.current!.innerHTML = `x${animationTarget.betAmount.toFixed(
-            2
-          )}&nbsp;💎`;
-        }
+          if (containerRef.current) {
+            containerRef.current.innerHTML = `${animationTarget.betAmount.toFixed(
+              2
+            )}&nbsp;💎`;
+          }
+        },
       });
     }
   }, [isAnimationStarted]);
 
   useEffect(() => {
     if (isAnimationStopped) {
+      //@TODO: cancelAnimation crashes the game in this instance for some reason
+      // cancelAnimation(animationRef.current as anime.AnimeInstance);
       animationRef.current?.pause();
+      if (containerRef.current && isRoundLost) {
+        containerRef.current.innerHTML = "0&nbsp;💎";
+      }
     }
   }, [isAnimationStopped]);
+
+  useEffect(() => {
+    return () => cancelAnimation(animationRef.current as anime.AnimeInstance);
+  }, []);
 };
 
 function Betting() {
@@ -68,7 +80,8 @@ function Betting() {
     betAmount,
     animationRandomnessCoefficient,
     stage === GameStage.PLAY && isBetConfirmed,
-    isBetWithdrawn || isRoundFinished
+    isBetWithdrawn || isRoundFinished,
+    isRoundFinished && !isBetWithdrawn
   );
 
   const handleBetInputChange: React.ChangeEventHandler<HTMLInputElement> = (

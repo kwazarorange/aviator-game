@@ -10,8 +10,9 @@ function CoefficientList() {
 
   return (
     <div className={styles.history}>
-      {coefficientList.map((coefficient) => (
+      {coefficientList.map((coefficient, index) => (
         <div
+          key={index}
           className={clsx(
             styles.history__item,
             coefficient >= 3 && styles["history__item--purple"],

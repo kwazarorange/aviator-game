@@ -33,7 +33,7 @@ function BetHistory() {
     <div className={styles.container}>
       <header className={styles.bets__header}>
         <div className={styles.bets__title}>
-          <p>{localization('history.title')}</p>
+          <p>{localization("history.title")}</p>
         </div>
         <Link href="/">
           <a className={styles.bets__close}>
@@ -44,6 +44,7 @@ function BetHistory() {
       <div className={styles.bets__list}>
         {currentPageHistory.map((bet) => (
           <div
+            key={bet.id}
             className={clsx(
               styles.bet,
               bet.winning_amount && styles["bet--success"]

@@ -11,7 +11,11 @@ import graphImage from "../../assets/images/graph.png";
 import styles from "./PlayScreen.module.scss";
 import { GameContext } from "../../state";
 import { createPortal } from "react-dom";
-import { localization, roundToTwoDecimals } from "../../helpers";
+import {
+  cancelAnimation,
+  localization,
+  roundToTwoDecimals,
+} from "../../helpers";
 import { GAME_CONTAINER_WIDTH } from "../../constants";
 
 /** How far away from boundaries of game container rider must be. in px */
@@ -106,6 +110,11 @@ const useRiderAnimation = (
     };
 
     addAnimation(0);
+
+    return () => {
+      cancelAnimation(riderAnimationRef.current as anime.AnimeInstance);
+      cancelAnimation(graphAnimationRef.current as anime.AnimeInstance);
+    };
   }, []);
 
   useEffect(() => {

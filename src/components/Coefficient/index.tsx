@@ -9,7 +9,7 @@ import {
 import styles from "./Coefficient.module.scss";
 import { ANIMATION_DURATION_COEFFICIENT_MS } from "../../constants";
 import { GameContext } from "../../state";
-import { roundToTwoDecimals } from "../../helpers";
+import { cancelAnimation, roundToTwoDecimals } from "../../helpers";
 
 const useCoefficientAnimation = (
   containerRef: RefObject<HTMLDivElement>,
@@ -35,14 +35,20 @@ const useCoefficientAnimation = (
         currentCoefficientRef.current = roundToTwoDecimals(
           animationTarget.coefficient
         );
-        containerRef.current!.innerHTML = `x${animationTarget.coefficient.toFixed(
-          2
-        )}`;
+        if (containerRef.current) {
+          containerRef.current.innerHTML = `x${animationTarget.coefficient.toFixed(
+            2
+          )}`;
+        }
       },
       complete: () => {
         onAnimationEnd();
       },
     });
+
+    return () => {
+      cancelAnimation(animationRef.current as anime.AnimeInstance)
+    }
   }, []);
 };
 

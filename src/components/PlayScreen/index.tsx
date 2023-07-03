@@ -94,7 +94,7 @@ const useRiderAnimation = (
       const damping = 70
       // Greater velocity leads to greater displacement 
       // from the equilibrium position
-      const velocity = 10
+      const velocity = 5
 
       const easingFunction = `spring(${mass}, ${stiffness}, ${damping}, ${velocity})`
 
@@ -113,7 +113,7 @@ const useRiderAnimation = (
         targets: graphRef.current,
         easing: easingFunction,
         scaleX: (riderX + RIDER_DIMENSIONS.width / 2) / 10,
-        scaleY: (-riderY + RIDER_DIMENSIONS.height) / 10,
+        scaleY: (-riderY + RIDER_DIMENSIONS.height / 1.5) / 10,
         endDelay,
       });
     };

@@ -57,7 +57,7 @@ function BetHistory() {
             <div className={styles.bet__amount}>
               {bet.winning_amount
                 ? `+${bet.winning_amount}`
-                : `-${roundToTwoDecimals(bet.bet * bet.coefficient)}`}
+                : `-${(bet.bet * bet.coefficient).toFixed(2)}`}
               &nbsp;💎
             </div>
           </div>

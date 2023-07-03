@@ -1,7 +1,7 @@
 import { Reducer } from "react";
 import { type State, type Action, ActionType, GameStage } from "./types";
 import { initialState } from ".";
-import { roundToTwoDecimals } from "../helpers";
+import { getWinCoefficient, roundToTwoDecimals } from "../helpers";
 
 //@TODO: Change game coefficient
 const reducer: Reducer<State, Action> = (state, action) => {
@@ -11,7 +11,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         ...state,
         stage: GameStage.PLAY,
         maxCoefficient: roundToTwoDecimals(
-          Number(Math.max(2, Math.random() * 10))
+          getWinCoefficient(state.numberOfRounds)
         ),
         animationRandomnessCoefficient: Math.random() + 0.5,
       };
@@ -24,6 +24,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         isWithdrawModalVisible: initialState.isWithdrawModalVisible,
         isBetWithdrawn: initialState.isBetWithdrawn,
         betAmount: initialState.betAmount,
+        numberOfRounds: state.numberOfRounds + 1,
       };
     case ActionType.SET_MONEY_AMOUNT:
       return { ...state, moneyAmount: action.value };

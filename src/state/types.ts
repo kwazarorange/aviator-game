@@ -12,7 +12,7 @@ export type State = {
   isRoundFinished: boolean; // whether coefficient stopped increasing or not
   isWithdrawModalVisible: boolean;
   isRequestFundsPopupVisible: boolean;
-  betAmount: string;
+  betAmount: number;
   maxCoefficient: number; // coefficient for the round
   withdrawCoefficient: number;
   /** Animation speed randomness coefficient. Range: 0.5 - 1.5 */
@@ -23,6 +23,7 @@ export type State = {
   history: Array<Bet>;
   coefficientList: Array<number>;
   casinoLink: string;
+  numberOfRounds: number;
 };
 
 export enum ActionType {
@@ -50,7 +51,7 @@ export type Action =
     }
   | {
       type: ActionType.SET_BET_AMOUNT;
-      value: string;
+      value: number;
     }
   | {
       type: ActionType.CONFIRM_BET;

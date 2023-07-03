@@ -7,7 +7,7 @@ const initialState: State = {
   isRoundFinished: false,
   isWithdrawModalVisible: false,
   isRequestFundsPopupVisible: false,
-  betAmount: "10",
+  betAmount: 10,
   maxCoefficient: 0,
   withdrawCoefficient: 0,
   animationRandomnessCoefficient: 1,
@@ -15,7 +15,8 @@ const initialState: State = {
   moneyAmount: 0,
   history: [],
   coefficientList: [],
-  casinoLink: ''
+  casinoLink: '',
+  numberOfRounds: 0
 };
 
 export default initialState;

@@ -18,26 +18,10 @@ const useGameLogic = () => {
   const handleSetPlayStage = () =>
     dispatch({ type: ActionType.SET_PLAY_STAGE });
 
-  //@TODO: maybe put this into component, and handleSetBet will be used when button clicked
-  // so until you press the button to bet, there's no value in store.
-  // I wont have to convert to number every time as well
-
-  const handleSetBetAmount = (value: string) => {
-    const { moneyAmount } = state;
-
-    const parsedValue = Number(value);
-
-    const validatedValue = isNaN(parsedValue)
-      ? state.betAmount
-      : parsedValue > moneyAmount
-      ? moneyAmount.toString()
-      : parsedValue < 1
-      ? "1"
-      : Number(value).toFixed(2);
-
+  const handleSetBetAmount = (value: number) => {
     dispatch({
       type: ActionType.SET_BET_AMOUNT,
-      value: validatedValue,
+      value: value,
     });
   };
 
@@ -111,7 +95,7 @@ const useGameLogic = () => {
     const newAmount = roundToTwoDecimals(state.moneyAmount + 100);
 
     dispatch({
-      type: ActionType.CLOSE_WITHDRAW_MODAL,
+      type: ActionType.CLOSE_REQUEST_FUNDS_POPUP,
     });
 
     api.wallet
@@ -219,7 +203,7 @@ const useGameLogic = () => {
     const { stage, isBetConfirmed, moneyAmount, betAmount } = state;
 
     if (stage === GameStage.PLAY && isBetConfirmed) {
-      const newAmount = moneyAmount - Number(betAmount);
+      const newAmount = moneyAmount - betAmount;
 
       api.wallet
         .post({ money_amount: newAmount, user_id: user_id })

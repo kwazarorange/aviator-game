@@ -16,7 +16,7 @@ function Header() {
     ...history
       .filter((bet) => bet.winning_amount)
       .map((bet) => roundToTwoDecimals(bet.coefficient))
-  );
+  ).toFixed(2);
 
   return (
     <div className={styles.header}>

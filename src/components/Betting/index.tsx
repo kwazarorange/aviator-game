@@ -1,4 +1,4 @@
-import { RefObject, useContext, useEffect, useRef } from "react";
+import { RefObject, useContext, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import anime from "animejs";
 
@@ -6,25 +6,29 @@ import { ANIMATION_DURATION_COEFFICIENT_MS } from "../../constants";
 import { GameContext, GameStage } from "../../state";
 
 import styles from "./Betting.module.scss";
-import { cancelAnimation, localization } from "../../helpers";
+import {
+  cancelAnimation,
+  localization,
+  roundToTwoDecimals,
+} from "../../helpers";
 
 const usePotentialWinAnimation = (
   containerRef: RefObject<HTMLParagraphElement>,
   finalCoefficient: number,
-  betAmount: string,
+  betAmount: number,
   animationRandomnessCoefficient: number,
   isAnimationStarted: boolean,
   isAnimationStopped: boolean,
   isRoundLost: boolean
 ) => {
   const animationRef = useRef<anime.AnimeInstance>();
-  const animationTarget = { betAmount: Number(betAmount) };
+  const animationTarget = { betAmount };
 
   useEffect(() => {
     if (isAnimationStarted) {
       animationRef.current = anime({
         targets: animationTarget,
-        betAmount: finalCoefficient * Number(betAmount),
+        betAmount: finalCoefficient * betAmount,
         easing: "linear",
         round: 100,
         duration:
@@ -73,6 +77,7 @@ function Betting() {
     { handleSetBetAmount, handleConfirmBet, handleWithdrawBet },
   ] = useContext(GameContext);
   const betAmountRef = useRef<HTMLParagraphElement>(null);
+  const [inputValue, setInputValue] = useState<string>("10");
 
   usePotentialWinAnimation(
     betAmountRef,
@@ -86,10 +91,25 @@ function Betting() {
 
   const handleBetInputChange: React.ChangeEventHandler<HTMLInputElement> = (
     e
-  ) => handleSetBetAmount(e.target.value);
+  ) => {
+    const parsedValue = Number(e.target.value);
+    const validatedValue = roundToTwoDecimals(Math.max(0, parsedValue));
 
-  const handleBetButtonClick = (value: number) =>
-    handleSetBetAmount((Number(betAmount) + value).toString());
+    if (!Number.isNaN(parsedValue)) {
+      setInputValue(
+        parsedValue !== validatedValue
+          ? validatedValue.toString()
+          : e.target.value
+      );
+      handleSetBetAmount(validatedValue);
+    }
+  };
+
+  const handleBetButtonClick = (value: number) => {
+    const updatedValue = roundToTwoDecimals(Math.max(0, betAmount + value));
+    setInputValue(updatedValue.toString());
+    handleSetBetAmount(updatedValue);
+  };
 
   const handleConfirmBetButtonClick = () => handleConfirmBet(!isBetConfirmed);
 
@@ -114,14 +134,14 @@ function Betting() {
               styles.betting__input__counter__button,
               styles["betting__input__counter__button--minus"]
             )}
-            onClick={() => handleBetButtonClick(-1)}
+            onClick={() => handleBetButtonClick(-10)}
           />
           <div className={styles["betting__input__counter__input-container"]}>
             <input
               type="text"
               inputMode="numeric"
               pattern="[0-9.]*"
-              value={betAmount}
+              value={inputValue}
               disabled={isBetControlsDisabled}
               onChange={handleBetInputChange}
             ></input>
@@ -133,7 +153,7 @@ function Betting() {
               styles.betting__input__counter__button,
               styles["betting__input__counter__button--plus"]
             )}
-            onClick={() => handleBetButtonClick(1)}
+            onClick={() => handleBetButtonClick(10)}
           />
         </div>
         <div className={styles.betting__input__delimiter} />

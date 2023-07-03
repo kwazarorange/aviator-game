@@ -30,3 +30,31 @@ export const cancelAnimation = (animation: AnimeInstance) => {
   const index = activeInstances.indexOf(animation);
   activeInstances.splice(index, 1);
 };
+
+const COEFFICIENT_CAP = 350;
+/** probability of coefficient = 1, arbitrary value, 60 to 100 */
+const CHANCE_OF_MINIMAL_COEF = 100;
+/** Decide on graph */
+const STARTING_RATE_OF_DECAY = 100;
+/** Decide on graph */
+const MINIMAL_RATE_OF_DECAY = 2;
+
+const HIDDEN_COEFFICIENT = 0.30; //@TODO: TBD
+/**
+ * Returns winning coefficient
+ * @param n number of rounds
+ */
+export const getWinCoefficient = (n: number) => {
+  const probability = Math.random() * 100;
+
+  const rateOfDecay = Math.max(
+    MINIMAL_RATE_OF_DECAY,
+    STARTING_RATE_OF_DECAY - HIDDEN_COEFFICIENT * n
+  );
+
+  return (
+    1 +
+    (COEFFICIENT_CAP - 1) *
+      (1 - Math.pow(probability / CHANCE_OF_MINIMAL_COEF, 1 / rateOfDecay))
+  );
+};

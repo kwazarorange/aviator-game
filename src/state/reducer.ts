@@ -21,7 +21,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
         stage: GameStage.WAIT,
         isRoundFinished: initialState.isRoundFinished,
         isBetConfirmed: initialState.isBetConfirmed,
-        isWithdrawModalVisible: initialState.isWithdrawModalVisible,
         isBetWithdrawn: initialState.isBetWithdrawn,
         betAmount: initialState.betAmount,
         numberOfRounds: state.numberOfRounds + 1,

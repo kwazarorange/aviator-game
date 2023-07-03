@@ -29,7 +29,7 @@ const RIDER_DIMENSIONS = {
 /** Min/max values for pause after each rider flying animation */
 const RIDER_ANIMATION_OFFSET_MS = {
   from: 0,
-  to: 500,
+  to: 250,
 };
 
 const useRiderAnimation = (
@@ -87,11 +87,11 @@ const useRiderAnimation = (
       // he greater the mass, the larger the displacement 
       // from the equilibrium position and the longer the duration 
       // of the oscillations
-      const mass = 15
+      const mass = 20
       // the lower the value, the stronger the spring
       const stiffness = 100
       // Higher damping leads to fewer oscillations and lower duration
-      const damping = 70
+      const damping = 80
       // Greater velocity leads to greater displacement 
       // from the equilibrium position
       const velocity = 5

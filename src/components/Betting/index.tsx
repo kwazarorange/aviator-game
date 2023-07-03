@@ -106,7 +106,7 @@ function Betting() {
   };
 
   const handleBetButtonClick = (value: number) => {
-    const updatedValue = roundToTwoDecimals(Math.max(0, betAmount + value));
+    const updatedValue = roundToTwoDecimals(Math.max(0, value));
     setInputValue(updatedValue.toString());
     handleSetBetAmount(updatedValue);
   };
@@ -161,21 +161,21 @@ function Betting() {
           <button
             disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
-            onClick={() => handleBetButtonClick(50)}
+            onClick={() => handleBetButtonClick(betAmount + 50)}
           >
             +50
           </button>
           <button
             disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
-            onClick={() => handleBetButtonClick(100)}
+            onClick={() => handleBetButtonClick(betAmount + 100)}
           >
             +100
           </button>
           <button
             disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
-            onClick={() => handleBetButtonClick(250)}
+            onClick={() => handleBetButtonClick(betAmount + 250)}
           >
             +250
           </button>

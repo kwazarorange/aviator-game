@@ -141,7 +141,7 @@ const useRiderAnimation = (
       anime.remove([riderRef.current, exhaustRef.current, graphRef.current]);
       riderAnimationRef.current = anime({
         targets: [riderRef.current, exhaustRef.current],
-        easing: "linear",
+        easing: 'easeInCubic',
         duration: 400,
         translateX: GAME_CONTAINER_WIDTH,
         translateY: -containerHeight,

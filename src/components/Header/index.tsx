@@ -26,7 +26,7 @@ function Header() {
           <Link href="/bids">
             <a className={styles.header__wallet}>
               <img src={walletImage} alt="Wallet" />
-              <h3>{moneyAmount}&nbsp;💎</h3>
+              <h3>{roundToTwoDecimals(moneyAmount)}&nbsp;💎</h3>
             </a>
           </Link>
           <div className={styles.header__delimiter} />

@@ -78,13 +78,12 @@ const useRiderAnimation = (
         flyingBoundaries.y.to
       );
 
-      const endDelay = anime.random(
-        RIDER_ANIMATION_OFFSET_MS.from,
-        RIDER_ANIMATION_OFFSET_MS.to
-      );
+      // const endDelay = anime.random(
+      //   RIDER_ANIMATION_OFFSET_MS.from,
+      //   RIDER_ANIMATION_OFFSET_MS.to
+      // );
 
-      //@TODO
-      // he greater the mass, the larger the displacement 
+      // the greater the mass, the larger the displacement 
       // from the equilibrium position and the longer the duration 
       // of the oscillations
       const mass = 20
@@ -103,7 +102,6 @@ const useRiderAnimation = (
         easing: easingFunction,
         translateX: riderX,
         translateY: riderY,
-        endDelay,
         complete: () => {
           addAnimation(count + 1);
         },
@@ -114,7 +112,6 @@ const useRiderAnimation = (
         easing: easingFunction,
         scaleX: (riderX + RIDER_DIMENSIONS.width / 2) / 10,
         scaleY: (-riderY + RIDER_DIMENSIONS.height / 1.5) / 10,
-        endDelay,
       });
     };
 

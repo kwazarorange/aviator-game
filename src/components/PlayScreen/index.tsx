@@ -83,27 +83,32 @@ const useRiderAnimation = (
       //   RIDER_ANIMATION_OFFSET_MS.to
       // );
 
-      // the greater the mass, the larger the displacement 
-      // from the equilibrium position and the longer the duration 
+      // the greater the mass, the larger the displacement
+      // from the equilibrium position and the longer the duration
       // of the oscillations
-      const mass = 20
+      const mass = count === 0 ? 20 : 25;
       // the lower the value, the stronger the spring
-      const stiffness = 100
+      const stiffness = 100;
       // Higher damping leads to fewer oscillations and lower duration
-      const damping = 80
-      // Greater velocity leads to greater displacement 
+      const damping = 80;
+      // Greater velocity leads to greater displacement
       // from the equilibrium position
-      const velocity = 5
+      const velocity = 5;
 
-      const easingFunction = `spring(${mass}, ${stiffness}, ${damping}, ${velocity})`
+      const easingFunction = `spring(${mass}, ${stiffness}, ${damping}, ${velocity})`;
+
+      let isNew = false;
 
       riderAnimationRef.current = anime({
         targets: [riderRef.current, exhaustRef.current],
         easing: easingFunction,
         translateX: riderX,
         translateY: riderY,
-        complete: () => {
-          addAnimation(count + 1);
+        update: (anim) => {
+          if (anim.progress >= 60 && !isNew) {
+            isNew = true;
+            addAnimation(count + 1);
+          }
         },
       });
 
@@ -112,6 +117,11 @@ const useRiderAnimation = (
         easing: easingFunction,
         scaleX: (riderX + RIDER_DIMENSIONS.width / 2) / 10,
         scaleY: (-riderY + RIDER_DIMENSIONS.height / 1.5) / 10,
+        update: (anim) => {
+          if (isNew) {
+            anim.pause();
+          }
+        },
       });
     };
 

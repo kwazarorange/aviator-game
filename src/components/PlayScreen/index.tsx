@@ -105,7 +105,7 @@ const useRiderAnimation = (
         translateX: riderX,
         translateY: riderY,
         update: (anim) => {
-          if (anim.progress >= 60 && !isNew) {
+          if (anim.progress >= (count === 0 ? 70 : 50) && !isNew) {
             isNew = true;
             addAnimation(count + 1);
           }

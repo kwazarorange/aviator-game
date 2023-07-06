@@ -153,7 +153,7 @@ function Betting() {
               styles.betting__input__counter__button,
               styles["betting__input__counter__button--plus"]
             )}
-            onClick={() => handleBetButtonClick(10)}
+            onClick={() => handleBetButtonClick(betAmount + 10)}
           />
         </div>
         <div className={styles.betting__input__delimiter} />
@@ -182,7 +182,9 @@ function Betting() {
           <button
             disabled={isBetControlsDisabled}
             className={styles.betting__input__bids__bid}
-            onClick={() => handleBetButtonClick(moneyAmount)}
+            onClick={() =>
+              handleBetButtonClick(moneyAmount > 10 ? moneyAmount : 10)
+            }
           >
             max
           </button>

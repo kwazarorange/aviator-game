@@ -53,8 +53,8 @@ export const getWinCoefficient = (n: number) => {
   );
 
   return (
-    1 +
-    (COEFFICIENT_CAP - 1) *
+    1.5 +
+    (COEFFICIENT_CAP - 1.5) *
       (1 - Math.pow(probability / CHANCE_OF_MINIMAL_COEF, 1 / rateOfDecay))
   );
 };

@@ -12,7 +12,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         maxCoefficient: roundToTwoDecimals(
           getWinCoefficient(state.numberOfRounds)
         ),
-        animationRandomnessCoefficient: Math.random() * (1.3 - 0.7) + 0.7,
+        animationRandomnessCoefficient: Math.random() * (1.2 - 0.8) + 0.8,
       };
     case ActionType.SET_WAIT_STAGE:
       return {

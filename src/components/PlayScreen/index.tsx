@@ -26,12 +26,6 @@ const RIDER_DIMENSIONS = {
   width: 87,
 };
 
-/** Min/max values for pause after each rider flying animation */
-const RIDER_ANIMATION_OFFSET_MS = {
-  from: 0,
-  to: 250,
-};
-
 const useRiderAnimation = (
   containerRef: RefObject<HTMLDivElement>,
   riderRef: RefObject<HTMLImageElement>,
@@ -78,11 +72,6 @@ const useRiderAnimation = (
         flyingBoundaries.y.to
       );
 
-      // const endDelay = anime.random(
-      //   RIDER_ANIMATION_OFFSET_MS.from,
-      //   RIDER_ANIMATION_OFFSET_MS.to
-      // );
-
       // the greater the mass, the larger the displacement
       // from the equilibrium position and the longer the duration
       // of the oscillations
@@ -90,10 +79,10 @@ const useRiderAnimation = (
       // the lower the value, the stronger the spring
       const stiffness = 100;
       // Higher damping leads to fewer oscillations and lower duration
-      const damping = 80;
+      const damping = 40;
       // Greater velocity leads to greater displacement
       // from the equilibrium position
-      const velocity = 5;
+      const velocity = count === 0 ? 1 : 1.5;
 
       const easingFunction = `spring(${mass}, ${stiffness}, ${damping}, ${velocity})`;
 
@@ -105,7 +94,7 @@ const useRiderAnimation = (
         translateX: riderX,
         translateY: riderY,
         update: (anim) => {
-          if (anim.progress >= (count === 0 ? 70 : 50) && !isNew) {
+          if (anim.progress >= (count === 0 ? 45 : 33) && !isNew) {
             isNew = true;
             addAnimation(count + 1);
           }
@@ -141,7 +130,7 @@ const useRiderAnimation = (
       anime.remove([riderRef.current, exhaustRef.current, graphRef.current]);
       riderAnimationRef.current = anime({
         targets: [riderRef.current, exhaustRef.current],
-        easing: 'easeInCubic',
+        easing: "easeInCubic",
         duration: 400,
         translateX: GAME_CONTAINER_WIDTH,
         translateY: -containerHeight,

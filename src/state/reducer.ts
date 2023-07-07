@@ -73,7 +73,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         ...state,
         isRoundFinished: true,
         coefficientList: [
-          Math.round(action.value),
+          roundToTwoDecimals(action.value),
           ...state.coefficientList,
         ].slice(0, 8),
       };

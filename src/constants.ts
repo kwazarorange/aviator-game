@@ -6,7 +6,7 @@ export const WAITING_SCREEN_DURATION_SECONDS = parseInt(
 );
 
 /** Animation speed coefficient. Smaller number makes animation faster */
-export const ANIMATION_DURATION_COEFFICIENT_MS = 3000;
+export const ANIMATION_DURATION_COEFFICIENT_MS = 1000;
 
 export const MAX_HISTORY_ELEMENTS_ON_PAGE = 10;
 

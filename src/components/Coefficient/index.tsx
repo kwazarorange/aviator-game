@@ -7,9 +7,12 @@ import {
   useRef,
 } from "react";
 import styles from "./Coefficient.module.scss";
-import { ANIMATION_DURATION_COEFFICIENT_MS } from "../../constants";
 import { GameContext } from "../../state";
-import { cancelAnimation, roundToTwoDecimals } from "../../helpers";
+import {
+  cancelAnimation,
+  calculateDuration,
+  roundToTwoDecimals,
+} from "../../helpers";
 
 const useCoefficientAnimation = (
   containerRef: RefObject<HTMLDivElement>,
@@ -22,15 +25,17 @@ const useCoefficientAnimation = (
   const animationTarget = { coefficient: 1 };
 
   useEffect(() => {
+    const duration = calculateDuration(
+      finalCoefficient,
+      animationRandomnessCoefficient
+    );
+
     animationRef.current = anime({
       targets: animationTarget,
       coefficient: finalCoefficient,
       easing: "linear",
       round: 100,
-      duration:
-        ANIMATION_DURATION_COEFFICIENT_MS *
-        animationRandomnessCoefficient *
-        finalCoefficient,
+      duration,
       update: () => {
         currentCoefficientRef.current = roundToTwoDecimals(
           animationTarget.coefficient
@@ -47,8 +52,8 @@ const useCoefficientAnimation = (
     });
 
     return () => {
-      cancelAnimation(animationRef.current as anime.AnimeInstance)
-    }
+      cancelAnimation(animationRef.current as anime.AnimeInstance);
+    };
   }, []);
 };
 

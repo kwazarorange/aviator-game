@@ -1,5 +1,5 @@
 import anime, { AnimeInstance } from "animejs";
-import { LOCALIZATION } from "./constants";
+import { ANIMATION_DURATION_COEFFICIENT_MS, LOCALIZATION } from "./constants";
 import { Language } from "./types";
 export const roundToTwoDecimals = (x: number) => Math.round(x * 100) / 100;
 
@@ -39,7 +39,7 @@ const STARTING_RATE_OF_DECAY = 100;
 /** Decide on graph */
 const MINIMAL_RATE_OF_DECAY = 2;
 
-const HIDDEN_COEFFICIENT = 0.30; //@TODO: TBD
+const HIDDEN_COEFFICIENT = 0.3; //@TODO: TBD
 /**
  * Returns winning coefficient
  * @param n number of rounds
@@ -58,3 +58,9 @@ export const getWinCoefficient = (n: number) => {
       (1 - Math.pow(probability / CHANCE_OF_MINIMAL_COEF, 1 / rateOfDecay))
   );
 };
+
+export function calculateDuration(x: number, randomnessCoefficient: number) {
+  return (
+    (2.9 * x + 1) * ANIMATION_DURATION_COEFFICIENT_MS * randomnessCoefficient
+  );
+}

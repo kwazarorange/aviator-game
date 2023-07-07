@@ -2,11 +2,11 @@ import { RefObject, useContext, useEffect, useRef, useState } from "react";
 import clsx from "clsx";
 import anime from "animejs";
 
-import { ANIMATION_DURATION_COEFFICIENT_MS } from "../../constants";
 import { GameContext, GameStage } from "../../state";
 
 import styles from "./Betting.module.scss";
 import {
+  calculateDuration,
   cancelAnimation,
   localization,
   roundToTwoDecimals,
@@ -15,6 +15,7 @@ import {
 const usePotentialWinAnimation = (
   containerRef: RefObject<HTMLParagraphElement>,
   finalCoefficient: number,
+  withdrawCoefficient: number,
   betAmount: number,
   animationRandomnessCoefficient: number,
   isAnimationStarted: boolean,
@@ -26,15 +27,17 @@ const usePotentialWinAnimation = (
 
   useEffect(() => {
     if (isAnimationStarted) {
+      const duration = calculateDuration(
+        finalCoefficient,
+        animationRandomnessCoefficient
+      );
+
       animationRef.current = anime({
         targets: animationTarget,
         betAmount: finalCoefficient * betAmount,
         easing: "linear",
         round: 100,
-        duration:
-          ANIMATION_DURATION_COEFFICIENT_MS *
-          animationRandomnessCoefficient *
-          finalCoefficient,
+        duration,
         update: () => {
           if (containerRef.current) {
             containerRef.current.innerHTML = `${animationTarget.betAmount.toFixed(
@@ -51,8 +54,12 @@ const usePotentialWinAnimation = (
       //@TODO: cancelAnimation crashes the game in this instance for some reason
       // cancelAnimation(animationRef.current as anime.AnimeInstance);
       animationRef.current?.pause();
-      if (containerRef.current && isRoundLost) {
-        containerRef.current.innerHTML = "0&nbsp;💎";
+      if (containerRef.current) {
+        if (isRoundLost) {
+          containerRef.current.innerHTML = "0&nbsp;💎";
+        } else {
+          containerRef.current.innerHTML = `${roundToTwoDecimals(betAmount * withdrawCoefficient)}&nbsp;💎`;
+        }
       }
     }
   }, [isAnimationStopped]);
@@ -66,6 +73,7 @@ function Betting() {
   const [
     {
       maxCoefficient,
+      withdrawCoefficient,
       betAmount,
       moneyAmount,
       isBetConfirmed,
@@ -82,6 +90,7 @@ function Betting() {
   usePotentialWinAnimation(
     betAmountRef,
     maxCoefficient,
+    withdrawCoefficient,
     betAmount,
     animationRandomnessCoefficient,
     stage === GameStage.PLAY && isBetConfirmed,

@@ -3,7 +3,6 @@ import { type State, type Action, ActionType, GameStage } from "./types";
 import { initialState } from ".";
 import { getWinCoefficient, roundToTwoDecimals } from "../helpers";
 
-//@TODO: Change game coefficient
 const reducer: Reducer<State, Action> = (state, action) => {
   switch (action.type) {
     case ActionType.SET_PLAY_STAGE:
@@ -13,7 +12,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
         maxCoefficient: roundToTwoDecimals(
           getWinCoefficient(state.numberOfRounds)
         ),
-        animationRandomnessCoefficient: Math.random() + 0.5,
+        animationRandomnessCoefficient: Math.random() * (1.3 - 0.7) + 0.7,
       };
     case ActionType.SET_WAIT_STAGE:
       return {

@@ -7,7 +7,7 @@ import PlayScreen from "../PlayScreen";
 import styles from "./Game.module.scss";
 import LoadingScreen from "../LoadingScreen";
 import { GameContext, GameStage } from "../../state";
-import { localization } from "../../helpers";
+import { localization, roundToTwoDecimals } from "../../helpers";
 
 function Game() {
   const [
@@ -38,7 +38,7 @@ function Game() {
               <div className={styles.withdraw_popup__text}>
                 <p>{localization("withdraw.popup.title")}</p>
                 <h2>
-                  {(betAmount * withdrawCoefficient).toFixed(2)}
+                  {roundToTwoDecimals(betAmount * withdrawCoefficient)}
                   &nbsp;💎
                 </h2>
               </div>

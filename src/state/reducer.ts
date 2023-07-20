@@ -40,7 +40,7 @@ const reducer: Reducer<State, Action> = (state, action) => {
     case ActionType.SET_COEFFICIENT_LIST:
       return {
         ...state,
-        coefficientList: action.value,
+        coefficientList: action.value.map((value) => Math.round(value)),
       };
     case ActionType.SET_BET_AMOUNT:
       return { ...state, betAmount: action.value };

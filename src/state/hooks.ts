@@ -15,8 +15,9 @@ const useGameLogic = () => {
 
   const handleSetLoadStage = () =>
     dispatch({ type: ActionType.SET_WAIT_STAGE });
-  const handleSetPlayStage = () =>
+  const handleSetPlayStage = () => {
     dispatch({ type: ActionType.SET_PLAY_STAGE });
+  };
 
   const handleSetBetAmount = (value: number) => {
     dispatch({
@@ -129,6 +130,17 @@ const useGameLogic = () => {
       if (!state.isBetWithdrawn && state.isBetConfirmed) {
         handleLoseBet();
       }
+
+      if (!state.isBetConfirmed) {
+        console.log("here");
+        api.bets.post({
+          user_id: user_id,
+          bet: 0,
+          coefficient: state.maxCoefficient,
+          winning_amount: 0,
+          is_active_bet: false,
+        });
+      }
     }
   };
 
@@ -165,14 +177,23 @@ const useGameLogic = () => {
         type: ActionType.SET_BET_HISTORY,
         value: list,
       });
-      dispatch({
-        type: ActionType.SET_COEFFICIENT_LIST,
-        value: list.map((bet) => Math.round(bet.coefficient)).slice(0, 7),
-      });
     });
   };
 
   useEffect(getHistoryEffect, []);
+
+  const getCoefficientListEffect = () => {
+    api.bets.coefficient(user_id).then((response) => {
+      const list = response.data;
+
+      dispatch({
+        type: ActionType.SET_COEFFICIENT_LIST,
+        value: list,
+      });
+    });
+  };
+
+  useEffect(getCoefficientListEffect, []);
 
   const postSessionEffect = () => {
     api.session.post({ user_id: user_id });

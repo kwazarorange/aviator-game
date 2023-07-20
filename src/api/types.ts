@@ -2,6 +2,8 @@ import { Bet } from "../types";
 
 export type BetPayload = Bet;
 
+export type CoefficientListPayload = Array<number>;
+
 export type TimeOfPlayPayload = {
   user_id: string;
 };

@@ -4,6 +4,7 @@ import axios from "./client";
 import {
   GET_BET_HISTORY,
   GET_CASINO_LINK,
+  GET_COEFFICIENT_HISTORY,
   GET_MONEY_AMOUNT,
   POST_BET,
   SET_GAME_TIME,
@@ -17,6 +18,7 @@ import type {
   GetMoneyAmountPayload,
   PostMoneyAmountPayload,
   PostBetPayload,
+  CoefficientListPayload,
 } from "./types";
 
 const handleResponse = <T>(response: AxiosResponse<T>) => response.data;
@@ -40,6 +42,10 @@ const bets = {
   list: (userId: string) =>
     request.get<ResponsePayload<Array<BetPayload>>>(
       `${GET_BET_HISTORY}/${userId}`
+    ),
+  coefficient: (userId: string) =>
+    request.get<ResponsePayload<CoefficientListPayload>>(
+      `${GET_COEFFICIENT_HISTORY}/${userId}`
     ),
   post: (data: PostBetPayload) =>
     request.post<ResponsePayload<null>>(POST_BET, data),

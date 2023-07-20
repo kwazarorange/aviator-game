@@ -78,11 +78,13 @@ const useGameLogic = () => {
 
   const handleGetHistory = () => {
     api.bets.list(user_id).then((response) => {
-      const list = response.data;
-      dispatch({
-        type: ActionType.SET_BET_HISTORY,
-        value: list,
-      });
+      if (response.ok) {
+        const list = response.data;
+        dispatch({
+          type: ActionType.SET_BET_HISTORY,
+          value: list,
+        });
+      }
     });
   };
 
@@ -161,22 +163,26 @@ const useGameLogic = () => {
   /** Gets amount of money on start */
   const getMoneyAmountEffect = () => {
     api.wallet.get(user_id).then((response) => {
-      const { money_amount } = response.data;
-      dispatch({
-        type: ActionType.SET_MONEY_AMOUNT,
-        value: money_amount,
-      });
+      if (response.ok) {
+        const { money_amount } = response.data;
+        dispatch({
+          type: ActionType.SET_MONEY_AMOUNT,
+          value: money_amount,
+        });
+      }
     });
   };
   useEffect(getMoneyAmountEffect, []);
 
   const getHistoryEffect = () => {
     api.bets.list(user_id).then((response) => {
-      const list = response.data;
-      dispatch({
-        type: ActionType.SET_BET_HISTORY,
-        value: list,
-      });
+      if (response.ok) {
+        const list = response.data;
+        dispatch({
+          type: ActionType.SET_BET_HISTORY,
+          value: list,
+        });
+      }
     });
   };
 
@@ -184,12 +190,14 @@ const useGameLogic = () => {
 
   const getCoefficientListEffect = () => {
     api.bets.coefficient(user_id).then((response) => {
-      const list = response.data;
+      if (response.ok) {
+        const list = response.data;
 
-      dispatch({
-        type: ActionType.SET_COEFFICIENT_LIST,
-        value: list,
-      });
+        dispatch({
+          type: ActionType.SET_COEFFICIENT_LIST,
+          value: list,
+        });
+      }
     });
   };
 
@@ -203,12 +211,14 @@ const useGameLogic = () => {
 
   const getCasinoLinkEffect = () => {
     api.casino.get(user_id).then((response) => {
-      const link = response.data?.link;
+      if (response.ok) {
+        const link = response.data?.link;
 
-      dispatch({
-        type: ActionType.SET_CASINO_LINK,
-        value: link,
-      });
+        dispatch({
+          type: ActionType.SET_CASINO_LINK,
+          value: link,
+        });
+      }
     });
   };
 

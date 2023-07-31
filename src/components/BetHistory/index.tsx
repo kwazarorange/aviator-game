@@ -9,7 +9,7 @@ import { GameContext } from "../../state";
 
 import styles from "./BetHistory.module.scss";
 import { MAX_HISTORY_ELEMENTS_ON_PAGE } from "../../constants";
-import { localization, roundToTwoDecimals } from "../../helpers";
+import { localization } from "../../helpers";
 
 function BetHistory() {
   const [{ history }, { handleGetHistory }] = useContext(GameContext);

@@ -24,9 +24,16 @@ import type {
 const handleResponse = <T>(response: AxiosResponse<T>) => response.data;
 
 const request = {
-  get: <T>(url: string) => axios.get<T>(url).then(handleResponse),
+  get: <T>(url: string) =>
+    axios
+      .get<T>(url, { headers: { init_data: Telegram.WebApp.initData } })
+      .then(handleResponse),
   post: <T>(url: string, data: {}) =>
-    axios.post<T>(url, data).then(handleResponse),
+    axios
+      .post<T>(url, data, {
+        headers: { init_data: Telegram.WebApp.initData },
+      })
+      .then(handleResponse),
 };
 
 const wallet = {

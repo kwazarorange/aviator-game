@@ -2,6 +2,7 @@ import { AxiosResponse } from "axios";
 import axios from "./client";
 
 import {
+  BASE_ROUTE,
   GET_BET_HISTORY,
   GET_CASINO_LINK,
   GET_COEFFICIENT_HISTORY,
@@ -26,11 +27,13 @@ const handleResponse = <T>(response: AxiosResponse<T>) => response.data;
 const request = {
   get: <T>(url: string) =>
     axios
-      .get<T>(url, { headers: { init_data: Telegram.WebApp.initData } })
+      .get<T>(`${BASE_ROUTE}${url}`, {
+        headers: { init_data: Telegram.WebApp.initData },
+      })
       .then(handleResponse),
   post: <T>(url: string, data: {}) =>
     axios
-      .post<T>(url, data, {
+      .post<T>(`${BASE_ROUTE}${url}`, data, {
         headers: { init_data: Telegram.WebApp.initData },
       })
       .then(handleResponse),

@@ -27,13 +27,13 @@ const handleResponse = <T>(response: AxiosResponse<T>) => response.data;
 const request = {
   get: <T>(url: string) =>
     axios
-      .get<T>(`${BASE_ROUTE}${url}`, {
+      .get<T>(`${BASE_ROUTE}${url}/`, {
         headers: { init_data: Telegram.WebApp.initData },
       })
       .then(handleResponse),
   post: <T>(url: string, data: {}) =>
     axios
-      .post<T>(`${BASE_ROUTE}${url}`, data, {
+      .post<T>(`${BASE_ROUTE}${url}/`, data, {
         headers: { init_data: Telegram.WebApp.initData },
       })
       .then(handleResponse),

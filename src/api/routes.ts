@@ -1,4 +1,4 @@
-export const BASE_ROUTE = "http://95.163.236.20:8000";
+export const BASE_ROUTE = "";
 
 export const GET_CASINO_LINK = "/link";
 export const GET_BET_HISTORY = "/bets";

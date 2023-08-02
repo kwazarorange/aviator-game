@@ -23,7 +23,7 @@ function App() {
   return (
     <main className={styles.App}>
       <GameContext.Provider value={[state, handlers, currentCoefficientRef]}>
-        <Router>
+        <Router base="/game">
           <Route path="/bids" component={BetHistory} />
           <Route path="/" component={GamePage} />
         </Router>

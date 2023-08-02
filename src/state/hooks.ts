@@ -38,6 +38,11 @@ const useGameLogic = () => {
       type: ActionType.SET_ROUND_END,
       value: currentCoefficientRef.current,
     });
+
+    api.bets.create_coefficient({
+      user_id: user_id,
+      coefficient: currentCoefficientRef.current,
+    });
   };
 
   const handleBetResult = (isWin: boolean) => {
@@ -134,7 +139,6 @@ const useGameLogic = () => {
       }
 
       if (!state.isBetConfirmed) {
-        console.log("here");
         api.bets.post({
           user_id: user_id,
           bet: 0,
@@ -248,9 +252,6 @@ const useGameLogic = () => {
   };
 
   useEffect(withdrawBetAmountOnGameStartEffect, [state.stage]);
-
-  //@TODO: remove
-  console.debug(state);
 
   return [
     state,

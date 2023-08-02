@@ -51,8 +51,6 @@ const usePotentialWinAnimation = (
 
   useEffect(() => {
     if (isAnimationStopped) {
-      //@TODO: cancelAnimation crashes the game in this instance for some reason
-      // cancelAnimation(animationRef.current as anime.AnimeInstance);
       animationRef.current?.pause();
       if (containerRef.current) {
         if (isRoundLost) {

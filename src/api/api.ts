@@ -8,6 +8,7 @@ import {
   GET_COEFFICIENT_HISTORY,
   GET_MONEY_AMOUNT,
   POST_BET,
+  SET_COEFFICIENT,
   SET_GAME_TIME,
   SET_MONEY_AMOUNT,
 } from "./routes";
@@ -20,6 +21,7 @@ import type {
   PostMoneyAmountPayload,
   PostBetPayload,
   CoefficientListPayload,
+  PostCoefficientPayload,
 } from "./types";
 
 const handleResponse = <T>(response: AxiosResponse<T>) => response.data;
@@ -57,6 +59,8 @@ const bets = {
     request.get<ResponsePayload<CoefficientListPayload>>(
       `${GET_COEFFICIENT_HISTORY}/${userId}`
     ),
+  create_coefficient: (data: PostCoefficientPayload) =>
+    request.post<ResponsePayload<null>>(SET_COEFFICIENT, data),
   post: (data: PostBetPayload) =>
     request.post<ResponsePayload<null>>(POST_BET, data),
 };

@@ -21,6 +21,11 @@ export type PostMoneyAmountPayload = {
   money_amount: number;
 };
 
+export type PostCoefficientPayload = {
+  user_id: string;
+  coefficient: number;
+};
+
 export type PostBetPayload = {
   user_id: string;
   bet: number;

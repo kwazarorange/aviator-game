@@ -203,11 +203,11 @@ const useGameLogic = () => {
 
   useEffect(getCoefficientListEffect, []);
 
-  const postSessionEffect = () => {
-    api.session.post({ user_id: user_id });
-  };
+  // const postSessionEffect = () => {
+  //   api.session.post({ user_id: user_id });
+  // };
 
-  useEffect(postSessionEffect, []);
+  // useEffect(postSessionEffect, []);
 
   const getCasinoLinkEffect = () => {
     api.casino.get(user_id).then((response) => {

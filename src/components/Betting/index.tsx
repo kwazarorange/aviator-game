@@ -143,7 +143,7 @@ function Betting() {
               styles.betting__input__counter__button,
               styles["betting__input__counter__button--minus"]
             )}
-            onClick={() => handleBetButtonClick(-10)}
+            onClick={() => handleBetButtonClick(betAmount - 10)}
           />
           <div className={styles["betting__input__counter__input-container"]}>
             <input

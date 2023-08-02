@@ -23,7 +23,7 @@ function Header() {
       <div className={styles.header__info}>
         <img src={luckyJetLogoImage} alt="Logo" />
         <div className={styles.header__statistics}>
-          <Link href="/bids">
+          <Link href={"/bids/" + location.search + location.hash}>
             <a className={styles.header__wallet}>
               <img src={walletImage} alt="Wallet" />
               <h3>{roundToTwoDecimals(moneyAmount)}&nbsp;💎</h3>
@@ -31,7 +31,7 @@ function Header() {
           </Link>
           <div className={styles.header__delimiter} />
           <div className={styles.header__record}>
-            <span>{localization('header.record')}</span>
+            <span>{localization("header.record")}</span>
             <div className={styles.header__ratio}>{maxWinCoefficient}</div>
           </div>
         </div>

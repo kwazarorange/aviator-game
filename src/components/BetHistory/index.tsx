@@ -35,7 +35,7 @@ function BetHistory() {
         <div className={styles.bets__title}>
           <p>{localization("history.title")}</p>
         </div>
-        <Link href="/">
+        <Link href={"/" + location.search + location.hash}>
           <a className={styles.bets__close}>
             <img src={crossImage} />
           </a>

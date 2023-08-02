@@ -6,4 +6,4 @@ export const GET_MONEY_AMOUNT = "/money_amount";
 export const SET_GAME_TIME = "/set_time_game";
 export const SET_MONEY_AMOUNT = "/money-amount/";
 export const POST_BET = "/bets";
-export const GET_COEFFICIENT_HISTORY = "/coefficient/";
+export const GET_COEFFICIENT_HISTORY = "/coefficient";

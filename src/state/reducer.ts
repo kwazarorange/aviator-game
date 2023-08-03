@@ -29,7 +29,9 @@ const reducer: Reducer<State, Action> = (state, action) => {
     case ActionType.SET_BET_HISTORY:
       return {
         ...state,
-        history: action.value,
+        history: action.value.sort(
+          (a, b) => +new Date(b.time) - +new Date(a.time)
+        ),
       };
     case ActionType.SET_COEFFICIENT_LIST:
       return {

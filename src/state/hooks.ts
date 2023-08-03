@@ -70,6 +70,10 @@ const useGameLogic = () => {
             type: ActionType.WITHDRAW_BET,
             value: coefficient,
           });
+          dispatch({
+            type: ActionType.SET_BET_HISTORY,
+            value: [...state.history, response.data],
+          });
         }
       });
   };
@@ -227,10 +231,6 @@ const useGameLogic = () => {
   };
 
   useEffect(getCasinoLinkEffect, []);
-
-  useEffect(() => {
-    handleGetHistory();
-  }, [state.isRoundFinished]);
 
   //@NOTE: if user confirmed bet, then money is removed
   //(and POST with new money amount is sent) on gmae start

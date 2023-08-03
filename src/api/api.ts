@@ -23,6 +23,7 @@ import type {
   CoefficientListPayload,
   PostCoefficientPayload,
 } from "./types";
+import { Bet } from "../types";
 
 const handleResponse = <T>(response: AxiosResponse<T>) => response.data;
 
@@ -62,7 +63,7 @@ const bets = {
   create_coefficient: (data: PostCoefficientPayload) =>
     request.post<ResponsePayload<null>>(SET_COEFFICIENT, data),
   post: (data: PostBetPayload) =>
-    request.post<ResponsePayload<null>>(POST_BET, data),
+    request.post<ResponsePayload<Bet>>(POST_BET, data),
 };
 
 const casino = {

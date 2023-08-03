@@ -30,12 +30,6 @@ const reducer: Reducer<State, Action> = (state, action) => {
       return {
         ...state,
         history: action.value,
-        maxCoefficient: Math.max(
-          0,
-          ...action.value
-            .filter((bet) => bet.winning_amount)
-            .map((bet) => bet.coefficient)
-        ),
       };
     case ActionType.SET_COEFFICIENT_LIST:
       return {
